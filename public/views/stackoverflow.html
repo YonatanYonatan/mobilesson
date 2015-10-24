@@ -1,0 +1,31 @@
+<uib-pagination ng-model="filter.page" ng-change="filter.pageChanged()" total-items="filter.total" items-per-page="30" max-size="10" rotate="false" class="pagination-sm" boundary-links="true"></uib-pagination>
+<ul>
+    <div ng-repeat="res in filter.itemsOnPage">
+        <div class="row jumbotron">
+            <div class="col-xs-12">
+                <h3><a href="{{res.link}}">{{res.title}}</a></h3>
+            </div>
+            <div class="col-xs-6">
+                <span class="label label-primary" ng-repeat="tag in res.tags">{{tag}}</span>
+            </div>
+            <div class="col-xs-3">
+                <h5>Asked By:<span class="label label-success">{{res.owner.user_id}}</span></h5>
+            </div>
+            <div class="col-xs-3">
+                <h5>Reputation:<span class="label label-success">{{res.owner.reputation}}</span></h5>
+            </div>
+            <div class="col-xs-3">
+                <h5>Views:<span class="label label-danger">{{res.view_count}}</span></h5>
+            </div>
+            <div class="col-xs-3">
+                <h5>Answers:<span class="label label-danger">{{res.answer_count}}</span></h5>
+            </div>
+            <div class="col-xs-3">
+                <h5>Score:<span class="label label-danger">{{res.score}}</span></h5>
+            </div>
+            <div class="col-xs-3">
+                <h5>Is Answered?{{res.is_answered}}</h5>
+            </div>
+        </div>
+    </div>
+</ul>

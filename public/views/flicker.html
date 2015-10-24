@@ -1,0 +1,16 @@
+<uib-pagination ng-model="filter.page" ng-change="filter.pageChanged()" total-items="filter.total" items-per-page="100" max-size="10" rotate="false" class="pagination-sm" boundary-links="true"></uib-pagination>
+<ul>
+    <div ng-repeat="res in filter.itemsOnPage">
+        <div class="row jumbotron">
+            <div class="col-xs-12">
+                <h3><a ng-click="filter.getPhoto(res.id,res.secret)">{{res.title}}</a></h3>
+            </div>
+            <div class="col-xs-6">
+                <h5>Posted By:<span class="label label-success">{{res.owner}}</span></h5>
+            </div>
+            <div class="col-xs-6">
+                <h5>Photo ID:<span class="label label-success">{{res.id}}</span></h5>
+            </div>
+        </div>
+    </div>
+</ul>

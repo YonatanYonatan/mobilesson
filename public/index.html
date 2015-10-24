@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app = "mobilesson">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Mobilesson Searcher</title>
+
+    <!--
+    Links &
+    Scripts
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myCSS.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.14.2.min.js"></script>
+    <script src="js/angular-ui-router.min.js"></script>
+    <script src="js/oauth-signature.min.js"></script>
+    <script src="js/myJS.js"></script>
+
+</head>
+<body ng-controller="filterController as filter">
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="What r u looking 4?" ng-model="filter.searchField">
+                <span class="input-group-btn btn-group" uib-dropdown>
+                    <button class="btn btn-default" uib-dropdown-toggle><span class="caret"></span></button>
+                    <ul class="uib-dropdown-menu" role="menu" ng-click="$event.stopPropagation()">
+                        <li role="menuitem" class="checkbox" ng-repeat="site in filter.sites">
+                            <label>
+                                <input type="checkbox" ng-model="site.isClicked" ng-click="filter.boxClicked(site.title)">
+                                {{site.title}}
+                            </label>
+                        </li>
+                        <li class="divider"></li>
+                        <li role="menuitem"><button type="button" class="btn btn-info btn-block" uib-popover-template="filter.popover" popover-placement="bottom"><spcan class="glyphicon glyphicon-plus"></spcan>Add Site</button></li>
+                    </ul>
+                </span>
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" ng-click="filter.search()" ng-disabled="filter.searchField === ''">SEARCH</button>
+                </span>
+            </div>
+
+            <h5><a ng-show="filter.showAdvanced" ng-click="filter.toggleAdvanced()">Advanced Search</a></h5>
+            <div style="display:inline-block;min-height:300px" class="container" ng-show="filter.advanced">
+                <h6>Words In Title:</h6>
+                <input ng-model="filter.titleField" placeholder="e.x. 'how can I'">
+                <h6>Accepted:</h6>
+                <input ng-model="filter.acceptedField" placeholder="'true' 'false' only!">
+                <h6>Closed:</h6>
+                <input ng-model="filter.closedField" placeholder="'true' 'false' only!">
+                <h6>Answers:</h6>
+                <input ng-model="filter.answersField" placeholder="e.x. '3'">
+                <h6>Text In Body:</h6>
+                <input ng-model="filter.bodyField" placeholder="e.x. 'anyone knows'">
+                <h6>Show Results Up To:</h6>
+                <uib-datepicker ng-model="filter.date" show-weeks="true" class="well well-sm"></uib-datepicker>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <h3 ng-show="filter.empty">No Results Found</h3>
+        <div ui-view></div>
+    </div>
+</body>
+</html>
